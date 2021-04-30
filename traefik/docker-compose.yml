@@ -41,3 +41,5 @@ services:
 networks:
   traffic:
     name: 'traefik'
+volumes:
+  acme:
