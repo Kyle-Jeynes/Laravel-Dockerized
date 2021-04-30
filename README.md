@@ -50,3 +50,23 @@ Should you encounter any issues, you can run `docker logs --tail=200 --follow tr
   ```bash
   docker-compose up -d --build
   ```
+  
+## Step Three: Installing dependencies & migrating
+
+You can install Composer within your container by executing the composer install command and then run it with `--no-dev`.
+
+**NOTE** The directory is volumed to your local machine so the composer file will not disappear meaning future builds will only require
+you to use `composer install --no-dev`.
+
+```bash
+docker exec -u root laravel_laravel-php_1 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && composer install --no-dev
+```
+
+You can migrate/seed your database by executing the `php artisan *` commands within the container too.
+
+```bash
+docker exec laravel_laravel-php_1 php artisan migrate
+docker exec laravel_laravel-php_1 php artisan db:seed
+```
+
+**NOTE** If your `laravel/.env` is in production, you need to pass the `-it` interactive flag or run with `--force`. 
