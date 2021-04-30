@@ -1,0 +1,67 @@
+version: '3'
+services:
+  laravel-mysql:
+    image: 'mysql:latest'
+    restart: 'always'
+    expose:
+      - '3306'
+    environment:
+      - 'MYSQL_RANDOM_ROOT_PASSWORD=true'
+      - 'MYSQL_DATABASE=${DATABASE_NAME}'
+      - 'MYSQL_USER=${DATABASE_USER}'
+      - 'MYSQL_PASSWORD=${DATABASE_PASSWORD}'
+      - 'MYSQL_ALLOW_EMPTY_PASSWORD=true'
+    volumes:
+      - 'laravel-database:/var/lib/mysql/'
+    networks:
+      - 'laravel'
+  laravel-php:
+    build:
+      context: .
+    image: 'laravel-dockerized:latest'
+    restart: 'always'
+    depends_on:
+      - 'laravel-mysql'
+    networks:
+      - 'laravel'
+    volumes:
+      - 'laravel-src:/var/www/html'
+  laravel-nginx:
+    image: 'nginx:alpine'
+    restart: 'always'
+    depends_on:
+      - 'laravel-php'
+    expose:
+      - '80'
+    volumes:
+      - 'laravel-src:/var/www/html'
+      - './nginx.conf:/etc/nginx/conf.d/default.conf'
+    networks:
+      - 'traefik'
+      - 'laravel'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=traefik'
+      - 'traefik.http.routers.nginx.entrypoints=http'
+      - 'traefik.http.routers.nginx.rule=Host(`${DOMAIN}`) || Host(`www.${DOMAIN}`)'
+      - 'traefik.http.routers.nginx.middlewares=redirect@file'
+      - 'traefik.http.routers.nginx-https.rule=Host(`${DOMAIN}`) || Host(`www.${DOMAIN}`)'
+      - 'traefik.http.routers.nginx-https.tls=true'
+      - 'traefik.http.routers.nginx-https.tls.certresolver=${DNS_PROVIDER}'
+      - 'traefik.http.routers.nginx-https.tls.domains[0].main=${DOMAIN}'
+      - 'traefik.http.routers.nginx-https.tls.domains[1].main=www.${DOMAIN}'
+      - 'traefik.http.routers.nginx.service=nginx'
+      - 'traefik.http.services.nginx.loadbalancer.server.port=80'
+      - 'traefik.http.services.nginx.loadBalancer.passHostHeader=true'
+      - 'traefik.http.middlewares.https-redirect.redirectscheme.scheme=https'
+      - 'traefik.http.middlewares.https-redirect.headers.customrequestheaders.X-Forwarded-Proto=https'
+      - 'traefik.http.routers.nginx.middlewares=https-redirect'
+networks:
+  laravel:
+    driver: 'bridge'
+  traefik:
+    name: '${TRAEFIK_NETWORK}'
+volumes:
+  laravel-database:
+    driver: 'local'
+  laravel-src:
