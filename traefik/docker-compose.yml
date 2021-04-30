@@ -39,7 +39,7 @@ services:
       - 'GODADDY_API_KEY=${PROVIDER_API_KEY}'
       - 'GODADDY_API_SECRET=${PROVIDER_API_SECRET}'
 networks:
-  traffic:
+  traefik:
     name: 'traefik'
 volumes:
   acme:
