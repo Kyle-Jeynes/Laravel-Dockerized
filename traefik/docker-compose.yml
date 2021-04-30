@@ -4,39 +4,39 @@ services:
     image: 'traefik:latest'
     restart: 'always'
     labels: 'traefik.enable=false'
-  networks:
-    - 'traefik'
-  ports:
-    - '80:80'
-    - '443:443'
-  volumes:
-    - '/var/run/docker.sock:/var/run/docker.sock'
-    - 'acme:/letsencrypt'
-  command:
-    - '--providers.docker=true'
-    - '--providers.docker.usebindportip=false'
-    - '--providers.docker.exposedbydefault=false'
-    - '--certificatesresolvers.godaddy.acme.dnschallenge=${TRAEFIK_DNS_CHALLENGE}'
-    - '--certificatesresolvers.godaddy.acme.dnschallenge.provider=${DNS_PROVIDER}'
-    - '--certificatesresolvers.godaddy.acme.email=${DNS_EMAIL}'
-    - '--certificatesresolvers.godaddy.acme.storage=${ACME_PATH}'
-    - '--providers.docker.watch=true'
-    - '--providers.docker.network=traefik'
-    - '--entrypoints.http.address=:80'
-    - '--entrypoints.https.address=:443'
-    - '--api.debug=false'
-    - '--api.insecure={$TRAEFIK_INSECURE}'
-    - '--global.sendanonymoususage=false'
-    - '--log.level=${TRAEFIK_LOG_LEVEL}'
-  healthcheck:
-    test: [ 'CMD', '/traefik', 'healthcheck' ]
-    interval: '1m'
-    timeout: '5s'
-    retries: 3
-    start_period: '10s'
-  environment:
-    - 'GODADDY_API_KEY=${PROVIDER_API_KEY}'
-    - 'GODADDY_API_SECRET=${PROVIDER_API_SECRET}'
+    networks:
+      - 'traefik'
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - 'acme:/letsencrypt'
+    command:
+      - '--providers.docker=true'
+      - '--providers.docker.usebindportip=false'
+      - '--providers.docker.exposedbydefault=false'
+      - '--certificatesresolvers.godaddy.acme.dnschallenge=${TRAEFIK_DNS_CHALLENGE}'
+      - '--certificatesresolvers.godaddy.acme.dnschallenge.provider=${DNS_PROVIDER}'
+      - '--certificatesresolvers.godaddy.acme.email=${DNS_EMAIL}'
+      - '--certificatesresolvers.godaddy.acme.storage=${ACME_PATH}'
+      - '--providers.docker.watch=true'
+      - '--providers.docker.network=traefik'
+      - '--entrypoints.http.address=:80'
+      - '--entrypoints.https.address=:443'
+      - '--api.debug=false'
+      - '--api.insecure={$TRAEFIK_INSECURE}'
+      - '--global.sendanonymoususage=false'
+      - '--log.level=${TRAEFIK_LOG_LEVEL}'
+    healthcheck:
+      test: [ 'CMD', '/traefik', 'healthcheck' ]
+      interval: '1m'
+      timeout: '5s'
+      retries: 3
+      start_period: '10s'
+    environment:
+      - 'GODADDY_API_KEY=${PROVIDER_API_KEY}'
+      - 'GODADDY_API_SECRET=${PROVIDER_API_SECRET}'
 networks:
   traffic:
     name: 'traefik'
