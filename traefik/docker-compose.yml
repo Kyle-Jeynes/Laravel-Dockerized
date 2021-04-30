@@ -3,7 +3,8 @@ services:
   traefik:
     image: 'traefik:latest'
     restart: 'always'
-    labels: 'traefik.enable=false'
+    labels:
+      - 'traefik.enable=false'
     networks:
       - 'traefik'
     ports:
