@@ -61,6 +61,7 @@ networks:
     driver: 'bridge'
   traefik:
     name: '${TRAEFIK_NETWORK}'
+    external: 'true'
 volumes:
   laravel-database:
     driver: 'local'
