@@ -37,3 +37,6 @@ services:
   environment:
     - 'GODADDY_API_KEY=${PROVIDER_API_KEY}'
     - 'GODADDY_API_SECRET=${PROVIDER_API_SECRET}'
+networks:
+  traffic:
+    name: 'traefik'
