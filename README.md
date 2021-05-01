@@ -91,3 +91,6 @@ docker exec -it -u root laravel_laravel-php_1 bash
 :/# cp .env.example .env
 :/# php artisan key:generate
 ```
+# Credits
+
+Massive shoutout to [@masseyb](https://blog.lazybit.ch/) for his knowledge contributions to make this project available.
