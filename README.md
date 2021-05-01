@@ -32,7 +32,7 @@ If you **do not** require `traefik` then skip over step one.
   docker-compose up -d
   ```
 
-Should you encounter any issues, you can run `docker logs --tail=200 --follow traefik` to debug issues.
+Should you encounter any issues, you can run `docker logs --tail=200 --follow traefik_traefik_1` to debug issues.
 
 ## Step Two: Laravel
 
