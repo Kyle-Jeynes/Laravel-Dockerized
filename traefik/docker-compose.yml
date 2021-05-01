@@ -26,7 +26,7 @@ services:
       - '--entrypoints.http.address=:80'
       - '--entrypoints.https.address=:443'
       - '--api.debug=false'
-      - '--api.insecure={$TRAEFIK_INSECURE}'
+      - '--api.insecure=${TRAEFIK_INSECURE}'
       - '--global.sendanonymoususage=false'
       - '--log.level=${TRAEFIK_LOG_LEVEL}'
     healthcheck:
