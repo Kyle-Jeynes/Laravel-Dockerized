@@ -33,7 +33,7 @@ If you **do not** require `traefik` then skip over step one.
 
 ## Step One: Traefik
 
-**NOTE** This container only supports the [`godaddy`](https://uk.godaddy.com/) provider. If you have an alternative DNS provider, you should read the [Traefik Docs](https://doc.traefik.io/traefik/v2.0/https/acme/#providers) on using your provider.
+**NOTE** This container is built to use the [`godaddy`](https://uk.godaddy.com/) provider. If you have an alternative DNS provider, you should read the [Traefik Docs](https://doc.traefik.io/traefik/v2.0/https/acme/#providers) on using your provider. Simply read the linked docs, find the enviroment keys you need to use and ammend the `docker-compose.yml` file within the `traefik` directory to use them `enviroment` keys insteaad.
 
 - Configure your `.env` inside the `traefik` directory to consist of your [provider API keys](https://developer.godaddy.com/keys) and any customisable options (by default all will work).
 
