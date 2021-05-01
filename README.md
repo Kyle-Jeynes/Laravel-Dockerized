@@ -45,6 +45,8 @@ Should you encounter any issues, you can run `docker logs --tail=200 --follow tr
 
 - Edit your `.env` file for your `laravel/src` project to include the MySQL options that you can set in your `laravel/.env`. You can see an example in `laravel/.example.production.env`.
 
+  **NOTE** Containers auto_discover DNS records - You must specify the "laravel-mysql" as the mysql host in your `laravel/.env`. Do not try use an IPV4 address.
+
 
 - Build your containers by running the following command:
   ```bash
