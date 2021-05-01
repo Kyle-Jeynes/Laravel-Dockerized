@@ -70,3 +70,11 @@ docker exec laravel_laravel-php_1 php artisan db:seed
 ```
 
 **NOTE** If your `laravel/.env` is in production, you need to pass the `-it` interactive flag or run with `--force`. 
+
+**NOTE** If you're using the default Laravel or your VCS does not copy `.env` because of `.gitignore` you can `vim` whilst inside a container or `cp`. Using the tutorial above, the Laravel repo:
+
+```bash
+docker exec -it -u root laravel_laravel-php_1 bash
+:/# cp .env.example .env
+:/# php artisan key:generate
+```
