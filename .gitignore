@@ -2,3 +2,4 @@
 .idea
 laravel/src/
 traefik/.env
+CONTRIBUTING.md
