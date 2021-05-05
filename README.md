@@ -51,6 +51,7 @@ Should you encounter any issues, you can run `docker logs --tail=200 --follow tr
 
 - Clone your repository inside the `laravel` directory and name it `src` - the Dockerfile looks for the `src` directory when building your image.
   ```bash
+  # Replace with your website repository
   git clone git@github.com:laravel/laravel.git src
   ```
 
