@@ -35,12 +35,12 @@ If you **do not** require `traefik` then skip over step one.
 
 **NOTE** This container is built to use the [`godaddy`](https://uk.godaddy.com/) provider. If you have an alternative DNS provider, you should read the [Traefik Docs](https://doc.traefik.io/traefik/v2.0/https/acme/#providers) on using your provider. Simply read the linked docs, find the enviroment keys you need to use and ammend the `docker-compose.yml` file within the `traefik` directory to use them `enviroment` keys insteaad.
 
-- Configure your `.env` inside the `traefik` directory to consist of your [provider API keys](https://developer.godaddy.com/keys) and any customisable options (by default all will work).
+- Configure your `.env` inside the `traefik` directory to consist of your [provider API keys](https://developer.godaddy.com/keys) and any customisable options (by default all will work). Add your `domain.tld` also.
 
 
 - Inside the `traefik` directory, run:
   ```bash
-  docker-compose up -d
+  docker-compose up -d --build
   ```
 
 Should you encounter any issues, you can run `docker logs --tail=200 --follow traefik_traefik_1` to debug issues.
@@ -70,10 +70,10 @@ Should you encounter any issues, you can run `docker logs --tail=200 --follow tr
 You can install Composer within your container by executing the composer install command and then run it with `--no-dev`.
 
 **NOTE** The directory is volumed to your local machine so the composer file will not disappear meaning future builds will only require
-you to use `composer install --no-dev`.
+you to use `composer install --no-dev`. Ensure you quote the command otherwise Ubuntu will assume you're piping it over to PHP rather than passing it as input.
 
 ```bash
-docker exec -u root laravel_laravel-php_1 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && composer install --no-dev
+docker exec -u root laravel_laravel-php_1 "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && composer install --no-dev"
 ```
 
 You can migrate/seed your database by executing the `php artisan *` commands within the container too.
