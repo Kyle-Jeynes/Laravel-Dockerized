@@ -20,7 +20,7 @@ Laravel Dockerized is a Traefik integrated solution for the deployment of Larave
   Please see [Issue #3](https://github.com/Kyle-Jeynes/Laravel-Dockerized/issues/3) that solves this. Newest update now fixes this issue so it is advised to update.
   
 - Laravel `$request->ip()` returns a private IPV4 address and not the real ip.
-  We're looking into using `X-Forward-For` headers to fix this Nginx issue. For now, the real IP can be resolved at `$_SERVER['HTTP_X_REAL_IP']`.
+  We're looking into using `X-Forward-For` headers to fix this Nginx issue. For now, the real IP can be resolved at `$_SERVER['HTTP_X_REAL_IP']`. **Please Upgrade** This has now been resolved in the newest release.
   
 - When will you support other providers?
   Supporting other providers is an adition that will come sooner than later - its just a case of adding the correct `enviroment` arguments to the Traefik container for your specific provider. [Take a look at the docs](https://doc.traefik.io/traefik/v2.0/https/acme/#providers) and you can easily add your own providers, if supported.
