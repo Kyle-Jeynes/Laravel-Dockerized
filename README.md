@@ -17,7 +17,7 @@ Laravel Dockerized is a Traefik integrated solution for the deployment of Larave
 # FAQ
 
 - I get a HTTP over HTTPS error
-  Please see [Issue #3](https://github.com/Kyle-Jeynes/Laravel-Dockerized/issues/3) that solves this.
+  Please see [Issue #3](https://github.com/Kyle-Jeynes/Laravel-Dockerized/issues/3) that solves this. Newest update now fixes this issue so it is advised to update.
   
 - Laravel `$request->ip()` returns a private IPV4 address and not the real ip.
   We're looking into using `X-Forward-For` headers to fix this Nginx issue. For now, the real IP can be resolved at `$_SERVER['HTTP_X_REAL_IP']`.
