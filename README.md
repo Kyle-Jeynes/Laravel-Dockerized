@@ -4,9 +4,8 @@ Laravel Dockerized is a Traefik integrated solution for the deployment of Larave
 # Features:
 
 - Traefik Nginx-Ingress
-- Traefik SSL Offload
-- Traefik DNS ACME Propagation
-- Laravel Dockerfile build with
+- DNS ACME Propagation To Offload SSL
+- Laravel Dockerfile build (from VCS - can easily be added) with
     - NPM (Node) Latest
     - PHP 7.4.16
 - Nginx
@@ -45,7 +44,7 @@ If you **do not** require `traefik` then skip over step one.
 
 Should you encounter any issues, you can run `docker logs --tail=200 --follow traefik_traefik_1` to debug issues.
 
-## Step Two: Laravel
+## Step Two: Laravel - Traefik will need to be running
 
 **NOTE** You will need to acquire your own Laravel VCS repository. I would suggest using SSH to make automation and CI/CD much easier.
 
