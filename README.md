@@ -1,5 +1,5 @@
 # Laravel-Dockerized
-Laravel Dockerized is a Traefik integrated solution for the deployment of Laravel to production environments. [Full walkthrough can be found here](https://github.com/Kyle-Jeynes/Laravel-Dockerized/blob/gh-pages/index.md).
+Laravel Dockerized is a Traefik integrated solution for the deployment of Laravel to production environments. [Full walkthrough can be found here](https://kyle-jeynes.github.io/Laravel-Dockerized/).
 
 # Features:
 
