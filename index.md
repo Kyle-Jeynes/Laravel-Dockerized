@@ -35,7 +35,8 @@ cd laravel && docker-compose up -d --build
 
 ```bash
 docker exec -it laravel_laravel-php_1 /bin/bash
-curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && composer install --no-dev
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+composer install --no-dev
 php artisan generate:key
 php artisan migrate --force
 ```
