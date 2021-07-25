@@ -1,37 +1,41 @@
-## Welcome to GitHub Pages
+## Laravel-Dockerized Walkthrough
 
-You can use the [editor on GitHub](https://github.com/Kyle-Jeynes/Laravel-Dockerized/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Ensure you have installed Docker and Docker Compose.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Visit [GoDaddy's Developer Portal](https://developer.godaddy.com/) and press API Keys: sign in and select `prod`, then make a note of these keys.
 
-### Markdown
+Clone or download the [latest release](https://github.com/Kyle-Jeynes/Laravel-Dockerized/releases/tag/V1.4) from the releases and add your keys to the `traefik/.env` file. Change the `domain.tld` to yours also.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Building The Traefik Container
 
-```markdown
-Syntax highlighted code block
+Navigate to your `traefik` directory and build your containers.
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```bash
+cd traefik && docker-compose up -d --build
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Running `docker-compose ps` should now show you a traefik container running. The health check can be ignored in the future, but on first bootup it should be healthy.
 
-### Jekyll Themes
+### Using VCS To Grab Your Laravel Project
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Kyle-Jeynes/Laravel-Dockerized/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+FTP shouldn't be used in production, so we added the ability to use VCS with ease from Github to host your project files. Clone it into `laravel/src`
 
-### Support or Contact
+```bash
+git clone https://github.com/laravel/quickstart-basic.git laravel/src
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Edit your `laravel/src/.env` file using the `laravel/.production.example.env` as an aid for DDNS to containers then run:
+
+```bash
+cd laravel && docker-compose up -d --build
+```
+
+### Using Composer And Interacting With The Container
+
+
+```bash
+docker exec -it laravel_laravel-php_1 /bin/bash
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && composer install --no-dev
+php artisan generate:key
+php artisan migrate --force
+```
