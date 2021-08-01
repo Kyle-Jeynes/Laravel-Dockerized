@@ -62,4 +62,4 @@ unlink "`docker volume inspect --format '{{ .Mountpoint }}' laravel_nginx-log`/a
 docker-compose up -d --force-recreate # recreate with new changes
 ```
 
-If you would like the logs to still write to `stdout`, you can run `tail -f` on the `access.log` in the nginx container.
+If you would like the logs to still write to `stdout`, you can run `tail -f` on the `access.log` in the nginx container. Or just use `docker exec -it laravel_fail2ban_1 /bin/bash -c 'tail -f /var/log/access.log'`
