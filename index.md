@@ -55,7 +55,7 @@ public function register() {
 
 ### Fail2Ban For Production
 
-After performing all these tasks, you'll need to remove the symlink for the nginx containers `access.log`. By default, it points to `/dev/stdout` to enable `docker logs` to work. We need to unlink this.
+After performing all these tasks, you'll need to remove the symlink for the nginx containers `access.log`. By default, it points to `/dev/stdout` to enable `docker logs` to work. We need to unlink this. Github.io seems to have template issues in code so the below is missing. Please see the actual [index.md](https://github.com/Kyle-Jeynes/Laravel-Dockerized/blob/gh-pages/index.md#fail2ban-for-production) on Github for this code below.
 
 ```bash
 unlink "`docker volume inspect --format '{{ .Mountpoint }}' laravel_nginx-log`/access.log"
