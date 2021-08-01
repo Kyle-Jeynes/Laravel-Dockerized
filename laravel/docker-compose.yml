@@ -11,6 +11,7 @@ services:
       - 'nginx-log:/var/log:ro'
       - './fail2ban/filter.d:/data/filter.d'
       - './fail2ban/jail.d:/data/jail.d'
+      - 'fail2ban-db:/data/db'
     env_file:
       - './fail2ban/fail2ban.env'
   laravel-mysql:
@@ -82,5 +83,6 @@ networks:
     external: 'true'
 volumes:
   laravel-database:
-    driver: 'local'
   laravel-src:
+  nginx-log:
+  fail2ban-db:
