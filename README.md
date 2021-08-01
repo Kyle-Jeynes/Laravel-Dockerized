@@ -7,6 +7,7 @@ Please visit Traefik documentation to see how to extend the Traefik capabilities
 
 # Features:
 
+- Fail2Ban
 - Traefik Nginx-Ingress
 - DNS ACME Propagation To Offload SSL
 - Laravel Dockerfile build (from VCS - can easily be added) with
@@ -20,7 +21,7 @@ Please visit Traefik documentation to see how to extend the Traefik capabilities
 # FAQ
 
 - I get a HTTP over HTTPS error
-  Please see [Issue #3](https://github.com/Kyle-Jeynes/Laravel-Dockerized/issues/3) that solves this. Newest update now fixes this issue so it is advised to update.
+  Please see [Issue #3](https://github.com/Kyle-Jeynes/Laravel-Dockerized/issues/3) that solves this.
   
 - Laravel `$request->ip()` returns a private IPV4 address and not the real ip.
   We're looking into using `X-Forward-For` headers to fix this Nginx issue. For now, the real IP can be resolved at `$_SERVER['HTTP_X_REAL_IP']`. **Please Upgrade** This has now been resolved in the newest release.
