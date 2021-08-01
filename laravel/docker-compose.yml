@@ -50,6 +50,7 @@ services:
     volumes:
       - 'laravel-src:/var/www/html'
       - './nginx.conf:/etc/nginx/conf.d/default.conf'
+      - 'nginx-log:/var/log/nginx'
     networks:
       - 'traefik'
       - 'laravel'
