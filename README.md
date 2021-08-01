@@ -7,7 +7,7 @@ Please visit Traefik documentation to see how to extend the Traefik capabilities
 
 # Features:
 
-- Fail2Ban
+- Fail2Ban - See [Fail2Ban](#fail2ban) to get this working
 - Traefik Nginx-Ingress
 - DNS ACME Propagation To Offload SSL
 - Laravel Dockerfile build (from VCS - can easily be added) with
@@ -96,6 +96,18 @@ docker exec -it -u root laravel_laravel-php_1 bash
 :/# cp .env.example .env
 :/# php artisan key:generate
 ```
+
+# Fail2Ban
+
+You'll need to remove the symlink that is created from nginx to the `/dev/stdout` by using:
+
+```
+cd laravel
+docker-compose up -d --build # if you have not done so already
+unlink "`docker volume inspect --format '{{ .Mountpoint }}' laravel_nginx-log`/access.log" # unlink the access.log symlink to stdout
+docker-compose up -d --force-recreate # recreate with new changes
+```
+
 # Credits
 
 Massive shoutout to [@masseyb](https://blog.lazybit.ch/) for his knowledge contributions to make this project available.
