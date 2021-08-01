@@ -1,5 +1,18 @@
 version: '3'
 services:
+  fail2ban:
+    image: 'crazymax/fail2ban:latest'
+    restart: 'always'
+    network_mode: 'host'
+    cap_add:
+      - 'NET_ADMIN'
+      - 'NET_RAW'
+    volumes:
+      - 'nginx-log:/var/log:ro'
+      - './fail2ban/filter.d:/data/filter.d'
+      - './fail2ban/jail.d:/data/jail.d'
+    env_file:
+      - './fail2ban/fail2ban.env'
   laravel-mysql:
     image: 'mysql:latest'
     restart: 'always'
