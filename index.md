@@ -40,3 +40,26 @@ composer install --no-dev
 php artisan generate:key
 php artisan migrate --force
 ```
+
+### Fixing HTTP over HTTPS issue
+
+Information on the issue [can be found here](https://github.com/Kyle-Jeynes/Laravel-Dockerized/issues/3). You need to alter your `app/Providers/AppServiceProvider.php` and ensure your `laravel/src/.env` is not set to `local`.
+
+```php
+public function register() {
+    if (env('APP_ENV') !== 'local') {
+        $this->app['request']->server->set('HTTPS', true);
+    }
+}
+```
+
+### Fail2Ban For Production
+
+After performing all these tasks, you'll need to remove the symlink for the nginx containers `access.log`. By default, it points to `/dev/stdout` to enable `docker logs` to work. We need to unlink this.
+
+```bash
+unlink "`docker volume inspect --format '{{ .Mountpoint }}' laravel_nginx-log`/access.log"
+docker-compose up -d --force-recreate # recreate with new changes
+```
+
+If you would like the logs to still write to `stdout`, you can run `tail -f` on the `access.log` in the nginx container.
