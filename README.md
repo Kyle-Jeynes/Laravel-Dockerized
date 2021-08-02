@@ -23,8 +23,8 @@ Please visit Traefik documentation to see how to extend the Traefik capabilities
 - I get a HTTP over HTTPS error
   Please see [Issue #3](https://github.com/Kyle-Jeynes/Laravel-Dockerized/issues/3) that solves this.
   
-- Laravel `$request->ip()` returns a private IPV4 address and not the real ip.
-  We're looking into using `X-Forward-For` headers to fix this Nginx issue. For now, the real IP can be resolved at `$_SERVER['HTTP_X_REAL_IP']`. **Please Upgrade** This has now been resolved in the newest release.
+- How can I disable CORS across domains?
+  You can uncomment the `laravel/nginx.conf` comments and change the domain to your domain.
   
 - When will you support other providers?
   Supporting other providers is an adition that will come sooner than later - its just a case of adding the correct `enviroment` arguments to the Traefik container for your specific provider. [Take a look at the docs](https://doc.traefik.io/traefik/v2.0/https/acme/#providers) and you can easily add your own providers, if supported.
