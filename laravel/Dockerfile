@@ -4,7 +4,7 @@ COPY src /var/www/html
 WORKDIR /var/www/html
 
 RUN npm install && \
-    npm run prod
+    npm run dev
 
 FROM php:7.4-fpm
 
