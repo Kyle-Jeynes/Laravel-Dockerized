@@ -42,8 +42,7 @@ RUN docker-php-ext-install pdo_mysql && \
     docker-php-ext-install intl; \
     docker-php-ext-install exif; \
     docker-php-ext-enable exif; \
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 LABEL maintainer="kyle.jeynes@iezon.co.uk" \
       version="1.3" \
