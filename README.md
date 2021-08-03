@@ -1,6 +1,8 @@
 # Laravel-Dockerized
 Laravel Dockerized is a Traefik integrated solution for the deployment of Laravel to production environments. [Full walkthrough can be found here](https://kyle-jeynes.github.io/Laravel-Dockerized/).
 
+This is basically Laravel Forge, free, at your full control.
+
 # Extending
 
 Please visit Traefik documentation to see how to extend the Traefik capabilities and add additional CNAME's etc... It can be achieved using `docker-compose.override.yml` and adding more labels or by creating new directories with its own configuration!
