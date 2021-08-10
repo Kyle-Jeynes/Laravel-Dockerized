@@ -3,6 +3,16 @@ Laravel Dockerized is a Traefik integrated solution for the deployment of Larave
 
 This is basically Laravel Forge, free, at your full control.
 
+# Security
+
+I put the application through Nessus to identify the web application CVE's and found the following:
+
+- HSTS Missing From HTTPS Server (RFC 6797)
+- SSL Medium Strength Cipher Suites Supported (SWEET32)
+- TLS Version 1.0 Protocol Detection
+
+The newest release addresses these security issues.
+
 # Extending
 
 Please visit Traefik documentation to see how to extend the Traefik capabilities and add additional CNAME's etc... It can be achieved using `docker-compose.override.yml` and adding more labels or by creating new directories with its own configuration!
