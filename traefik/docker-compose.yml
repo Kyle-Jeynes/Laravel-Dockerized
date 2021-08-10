@@ -12,6 +12,7 @@ services:
       - '443:443'
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
+      - './traefik.yaml:/traefik_conf.yaml'
       - 'acme:/letsencrypt'
     command:
       - '--providers.docker=true'
@@ -29,12 +30,7 @@ services:
       - '--api.insecure=${TRAEFIK_INSECURE}'
       - '--global.sendanonymoususage=false'
       - '--log.level=${TRAEFIK_LOG_LEVEL}'
-    healthcheck:
-      test: [ 'CMD', '/traefik', 'healthcheck' ]
-      interval: '1m'
-      timeout: '5s'
-      retries: 3
-      start_period: '10s'
+      - '--providers.file.filename=/traefik_conf.yaml'
     environment:
       - 'GODADDY_API_KEY=${PROVIDER_API_KEY}'
       - 'GODADDY_API_SECRET=${PROVIDER_API_SECRET}'
